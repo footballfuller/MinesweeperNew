@@ -1,11 +1,13 @@
+var actualMines=10;
+var displayMines=10;
+	
 function reDrawGame(rows, cols) {
 	var rows=9;
 	var cols=9;
 	
-	
 	setHTML("outputEl", ""); 
 	
- addHTML("outputEl","0" + " seconds");
+ addHTML("outputEl","<img id='Bomb Counter' src='bomb.jpg'>" + "  d" + displayMines + "   a" + actualMines) ;
 addHTML("outputEl", "<br>");
 addHTML("outputEl", "<br>");
 addHTML("outputEl", "<br>");

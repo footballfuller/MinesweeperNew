@@ -78,24 +78,49 @@ console.log( row,col);
   // addHTML("squareLocation", a);
 addHTML("squareLocation", row + " " + col + " " + "|");
 
+// regular square is 15. flag is 16. bomb is 17. square with hidden bomb is 18. flag with bomb under is 19
 
 if(flagRightClick()) {
 	if (newGrid[row][col]=="15"){
 			newGrid[row][col]= "16";
+			displayMines--;
 			reDrawGame();
 	}else if(newGrid[row][col]=="18"){
 			newGrid[row][col]= "19";
+			displayMines--;
+			actualMines--;
+			//if (actualMines=="0"){
+			//	if(squareRevealCheck()){
+					//gameWin();
+				//}else{
+				//	reDrawGame();
+				//}
+			//}else{
 			reDrawGame();
+			//}
 	}else if(newGrid[row][col]=="16"){
 			newGrid[row][col]= "15";
+			displayMines++;
 			reDrawGame();
 	}else if(newGrid[row][col]=="19"){
 			newGrid[row][col]= "18";
+			displayMines++;
+			actualMines++;
 			reDrawGame();
 	}
  }else{
-	 newGrid[row][col]= "0";
-     reDrawGame();
+		if(newGrid[row][col]=="15"){
+			//zeroCheck();
+			//numberBombCheck();
+			newGrid[row][col]= "4";
+			reDrawGame();
+		}else if (newGrid[row][col]=="18"){
+				//gameOver();
+				newGrid[row][col]= "17";
+				reDrawGame();
+		}
+
+	 
  }
  
 
