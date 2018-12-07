@@ -55,11 +55,6 @@ function getBlankSquare(row,col){
 
 function myFunction(row,col) { 
 console.log( row,col);
-
-//var a = newGrid.indexOf( document.getElementById("Img"));
-   // document.getElementById("squareLocation").innerHTML = a;
-
-  // addHTML("squareLocation", a);
 addHTML("squareLocation", row + " " + col + " " + "|");
 
 // regular square is 15. flag is 16. bomb is 17. square with hidden bomb is 18. flag with bomb under is 19
@@ -126,6 +121,9 @@ function numberBombCheck(row,col){
 	
 }
 function zeroCheck(row,col){
+	
+}
+function squareRevealCheck(){
 	
 }
 
