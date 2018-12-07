@@ -136,7 +136,6 @@ function grid() {
 	} else if (difficulty == medium) {
 		return medium;
 	} else return hard;
-	console.log(difficulty);
 }
 
 function search(ele) {
