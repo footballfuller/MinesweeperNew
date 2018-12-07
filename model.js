@@ -94,8 +94,7 @@ if(flagRightClick()) {
 	}
  }else{
 		if(newGrid[row][col]=="15"){
-			//zeroCheck();
-			//numberBombCheck();
+			//numberBombCheck(row,col);
 			newGrid[row][col]= "4";
 			reDrawGame();
 		}else if (newGrid[row][col]=="18"){
@@ -103,7 +102,11 @@ if(flagRightClick()) {
 				reDrawGame();
 				window.setTimeout(gameOver, 1000);
 				
+		}else if (newGrid[row][col]=="0"){
+			//zeroCheck(row,col);
+			reDrawGame();
 		}
+		
 
 	 
  }
@@ -118,6 +121,12 @@ function gameOver(){
 function gameWin(){
 	setHTML("outputEl", "You won the game,Congrats!!" + "<br>" + "<img src='smiley.jpg' alt='Smiley' height='200' width='200' >"
 	 + "<br>" + "Press new game button to play again!"); 
+}
+function numberBombCheck(row,col){
+	
+}
+function zeroCheck(row,col){
+	
 }
 
 function newGame(){
