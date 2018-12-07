@@ -35,25 +35,9 @@ var blankGrid =  [[15, 15, 18, 15, 15, 15, 15, 15, 15] ,
 			   [15, 15, 18, 15, 15, 15 , 15, 18, 15] ];
 			
 			
-var gameLost=false;
-var gameWon=false;
-var bombsLeft= 6;
-var time= 20;
 
 
 
-
-
-
-function hasBomb(content){  //if square has a bomb 
-	if(content==18){
-		return true;
-	}else if(content==19){
-		return true;
-	} else{
-		return false;
-	}
-}
 
 
 function getSquare(row, col) { 
@@ -115,15 +99,25 @@ if(flagRightClick()) {
 			newGrid[row][col]= "4";
 			reDrawGame();
 		}else if (newGrid[row][col]=="18"){
-				//gameOver();
-				newGrid[row][col]= "17";
+			    newGrid[row][col]= "17";
 				reDrawGame();
+				window.setTimeout(gameOver, 1000);
+				
 		}
 
 	 
  }
  
 
+}
+
+function gameOver(){
+	setHTML("outputEl", "You Clicked a Mine,Game Over!" + "<br>" + "<img src='bomb.jpg' alt='Bomb' height='200' width='200' >"
+	 + "<br>" + "Press new game button to try again!"); 
+}
+function gameWin(){
+	setHTML("outputEl", "You won the game,Congrats!!" + "<br>" + "<img src='smiley.jpg' alt='Smiley' height='200' width='200' >"
+	 + "<br>" + "Press new game button to play again!"); 
 }
 
 function newGame(){
