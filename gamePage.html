@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Minesweeper Game</title>
+<link  rel="stylesheet" type="text/css" href="StyleSheet.css">
+</head>
+<body onload="displayStorage()">
+<h1>Minesweeper</h1>
+<hr><hr>
+<br><br>
+
+<button id="XMLbutton" style="left: 50%; position: absolute;" onclick="getAddresses()">XML Parse</button>
+<button id="drawNewGame" onclick="audio(); newGame();">New Game</button>
+<audio id="audio" src="Dreams.mp3" ></audio>
+<!--Music source: https://www.bensound.com-->
+<br><br>
+
+<div id="outputEl" > Press button above to begin a new game.
+</div>
+
+<br>
+<div id="squareLocation" style="color: red"> </div>
+
+
+
+<div id="addressDiv" style="left: 30%; position: absolute; color: red;" >test</div>
+
+<script src="model.js"></script>
+<script src="view.js"></script>
+</body>
+</html>
