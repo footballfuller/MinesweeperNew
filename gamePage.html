@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Minesweeper Game</title>
-<link  rel="stylesheet" type="text/css" href="StyleSheet.css">
+    <meta charset="UTF-8">
+    <title>Minesweeper Game</title>
+    <link rel="stylesheet" type="text/css" href="StyleSheet.css">
+    <script src="model.js"></script>
+    <script src="view.js"></script>
 </head>
+
 <body onload="displayStorage()">
-<h1>Minesweeper</h1>
-<hr><hr>
-<br><br>
+    <h1>Minesweeper</h1>
+    <hr>
+    <hr>
+    <br><br>
 
-<button id="XMLbutton" style="left: 50%; position: absolute;" onclick="getAddresses()">XML Parse</button>
-<button id="drawNewGame" onclick="audio(); newGame();">New Game</button>
-<audio id="audio" src="Dreams.mp3" ></audio>
-<!--Music source: https://www.bensound.com-->
-<br><br>
+    <button id="XMLbutton" style="left: 50%; position: absolute;" onclick="getAddresses()">XML Parse</button>
+    <button id="drawNewGame" onclick="audio(); newGame();">New Game</button>
+    <audio id="audio" src="Dreams.mp3"></audio>
+    <!--Music source: https://www.bensound.com-->
+    <br><br>
 
-<div id="outputEl" > Press button above to begin a new game.
-</div>
+    <div id="outputEl"> 
+        Press button above to begin a new game.
+    </div>
 
-<br>
-<div id="squareLocation" style="color: red"> </div>
+    <br>
+    <div id="squareLocation" style="color: red"></div>
 
+    <p style="top:55%;left: 70%; position: absolute;">Change Difficulty
+        <select id="selection">
+            <option value="easy" selected>Easy (9 x 9) with 10 mines</option>
+            <option value="medium">Medium (15 x 15) with 15 mines</option>
+            <option value="hard">Hard (20 x 20) with 20 mines</option>
+        </select>
+    </p>
 
+    <div id="addressDiv" style="left: 30%; position: absolute; color: red;">test</div>
 
-<div id="addressDiv" style="left: 30%; position: absolute; color: red;" >test</div>
-
-<script src="model.js"></script>
-<script src="view.js"></script>
 </body>
+
 </html>
