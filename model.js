@@ -9,75 +9,83 @@ function diff() {
 	return document.getElementById("selection").value;
 }
 
-function adjacentBombs() {
-	//for the square count how many squares have a bomb  adjacent to it
-}
-
-function clickSquare() {
-	//check if square has been clicked then see if bomb is under square,if so end game(lose), if not change grid number to represent new icon with number revealing adjacent bombs
-}
-
-function placeFlag() {
-	//places flag on square and changes content number based on if there is a bomb there. if there is bomb there decrease bombs left by one, if bombs left is zero end game(win)
-}
-
-function clicked(content) { //if the square has been clicked previously
-	if (content == 15) {
-		return false;
-	} else if (content == 18) {
-		return false;
-	} else if (content == 16) {
-		return false;
-	} else if (content == 19) {
-		return false;
-	} else {
-		return true;
-	}
-}
-
-function hasBomb(content) { //if square has a bomb 
-	if (content == 18) {
-		return true;
-	} else if (content == 19) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 function getNewSquare(row, col) {
 	return newGrid[row][col];
 }
 
 function myFunction(row, col) {
 	console.log(row, col);
-
-	//var a = newGrid.indexOf( document.getElementById("Img"));
-	// document.getElementById("squareLocation").innerHTML = a;
-
-	// addHTML("squareLocation", a);
 	addHTML("squareLocation", row + " " + col + " " + "|");
 
+	// regular square is 15. flag is 16. bomb is 17. square with hidden bomb is 18. flag with bomb under is 19
 
 	if (flagRightClick()) {
 		if (newGrid[row][col] == "15") {
 			newGrid[row][col] = "16";
+			displayMines--;
 			reDrawGame();
 		} else if (newGrid[row][col] == "18") {
 			newGrid[row][col] = "19";
+			displayMines--;
+			actualMines--;
+			//if (actualMines=="0"){
+			//	if(squareRevealCheck()){
+			//gameWin();
+			//}else{
+			//	reDrawGame();
+			//}
+			//}else{
 			reDrawGame();
+			//}
 		} else if (newGrid[row][col] == "16") {
 			newGrid[row][col] = "15";
+			displayMines++;
 			reDrawGame();
 		} else if (newGrid[row][col] == "19") {
 			newGrid[row][col] = "18";
+			displayMines++;
+			actualMines++;
 			reDrawGame();
 		}
 	} else {
-		newGrid[row][col] = "0";
-		reDrawGame();
+		if (newGrid[row][col] == "15") {
+			//numberBombCheck(row,col);
+			newGrid[row][col] = "4";
+			reDrawGame();
+		} else if (newGrid[row][col] == "18") {
+			newGrid[row][col] = "17";
+			reDrawGame();
+			window.setTimeout(gameOver, 1000);
+
+		} else if (newGrid[row][col] == "0") {
+			//zeroCheck(row,col);
+			reDrawGame();
+		}
+
 	}
 
+
+}
+
+function gameOver() {
+	setHTML("outputEl", "You Clicked a Mine,Game Over!" + "<br>" + "<img src='bomb.jpg' alt='Bomb' height='200' width='200' >" +
+		"<br>" + "Press new game button to try again!");
+}
+
+function gameWin() {
+	setHTML("outputEl", "You won the game,Congrats!!" + "<br>" + "<img src='smiley.jpg' alt='Smiley' height='200' width='200' >" +
+		"<br>" + "Press new game button to play again!");
+}
+
+function numberBombCheck(row, col) {
+
+}
+
+function zeroCheck(row, col) {
+
+}
+
+function squareRevealCheck() {
 
 }
 
