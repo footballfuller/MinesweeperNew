@@ -43,31 +43,7 @@ var time= 20;
 
 
 
-function adjacentBombs(){
-	//for the square count how many squares have a bomb  adjacent to it
-}
 
-function clickSquare(){
-	//check if square has been clicked then see if bomb is under square,if so end game(lose), if not change grid number to represent new icon with number revealing adjacent bombs
-}
-
-function placeFlag(){
-	//places flag on square and changes content number based on if there is a bomb there. if there is bomb there decrease bombs left by one, if bombs left is zero end game(win)
-}
-
-function clicked(content){  //if the square has been clicked previously
-	if(content==15){
-		return false;
-	}else if(content==18){
-		return false;
-	}else if(content==16){
-		return false;
-	}else if(content==19){
-		return false;
-	}else{
-		return true;
-	}
-}
 
 function hasBomb(content){  //if square has a bomb 
 	if(content==18){
