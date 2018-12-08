@@ -19,26 +19,26 @@ function numberBombCheck(b, a) {
 				
 
 					// the value of this box is the sum of the mines in the eight neighboring tiles:
-					 if(getNewSquare(x, y+1)=='18'){ // down
+					 if(getNewSquare(x, y+1)=='18' || getNewSquare(x, y+1)== '19'){ // down
 						 sum++;
-					 }else if(getNewSquare(x-1,y+1)=='18'){// down & left
+					 }if(getNewSquare(x-1,y+1)=='18' || getNewSquare(x-1,y+1)== '19'){// down & left
 						 sum++;
-					 }else if(getNewSquare(x+1,y+1)=='18') {// down & right
+					 }if(getNewSquare(x+1,y+1)=='18' || getNewSquare(x+1,y+1)=='19') {// down & right
 						 sum++;
-					 }else if(getNewSquare(x,y-1)=='18'){ // up
+					 }if(getNewSquare(x,y-1)=='18' || getNewSquare(x,y-1)== '19'){ // up
 						 sum++;
-					 }else if(getNewSquare(x-1,y-1)=='18'){// up & left
+					 }if(getNewSquare(x-1,y-1)=='18' || getNewSquare(x-1,y-1)== '19'){// up & left
 						 sum++;
-					 }else if(getNewSquare(x+1,y-1)=='18'){// up & right
+					 }if(getNewSquare(x+1,y-1)=='18' || getNewSquare(x+1,y-1)== '19'){// up & right
 						 sum++;
-					 }else if(getNewSquare(x-1,y)=='18'){// left
+					 }if(getNewSquare(x-1,y)=='18' || getNewSquare(x-1,y)== '19'){// left
 						 sum++;
-					 }else if(getNewSquare(x+1,y)=='18'){// right.
+					 }if(getNewSquare(x+1,y)=='18' || getNewSquare(x+1,y)== '19'){// right.
 						 sum++;
 					 }
 				
 
-	console.log(sum);			
+	console.log("sum: " + sum);			
 	return sum;//number of bombs next to current cell;
 }
 function diff() {
@@ -46,6 +46,26 @@ function diff() {
 }
 
 function getNewSquare (row, col) {
+	var x7;
+	var y7;
+	var level7=diff();
+
+	if (level7 == "easy") {
+		x7= 3;
+		y7=3;
+	} else if (level7 == "medium") {
+		x7=7;
+		y7=7;
+	} else{
+		x7=10;
+		y7=10;
+	}
+	if (row<0|| col<0){
+		return;
+	}if (row>x7-1|| col>y7-1){
+		return;
+	}
+		
 	return newGrid[row][col];
 }
 
