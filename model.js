@@ -9,10 +9,6 @@ function diff() {
 	return document.getElementById("selection").value;
 }
 
-function getNewSquare(row, col) {
-	return newGrid[row][col];
-}
-
 function myFunction(row, col) {
 	console.log(row, col);
 	addHTML("squareLocation", row + " " + col + " " + "|");
@@ -92,7 +88,7 @@ function squareRevealCheck() {
 function newGame() {
 	newGrid = grid();
 	setHTML("squareLocation", "");
-	reDrawGame();
+	reDrawGame(newGrid);
 }
 function eas(){
 	var myArray = [[
@@ -135,6 +131,7 @@ function grid() {
 	var difficulty = diff();
 
 	var easy = eas();
+	console.log(easy);
 	var medium = [
 		[15, 15, 18, 15, 15, 15, 15, 15, 15],
 		[15, 15, 15, 15, 15, 15, 15, 15, 15],
