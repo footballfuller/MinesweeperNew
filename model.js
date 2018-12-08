@@ -94,7 +94,12 @@ for (r = 0; r < xx; r++) {
 		for (c = 0; c < yy; c++) {
 			var SRcontent = getNewSquare(r, c);
 			console.log(SRcontent);
-			if (SRcontent == "15") {
+			if(SRcontent == "16") {
+				r=xx;
+				c=yy;
+				return true;
+				
+			}else if (SRcontent == "15") {
 				r=xx;
 				c=yy;
 				return true;
