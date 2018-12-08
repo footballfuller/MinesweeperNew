@@ -5,74 +5,80 @@
 ///////////////////
 
 var currentState = []; // Current Grid
-var currentLvl;		   // Current Difficulty 
+var currentLvl; // Current Difficulty 
 var newGrid;
 
 ////////////////////
 function numberBombCheck(b, a) {
-	
-	var sum=0; 
-		var x = b;
-		var y = a;
-	       // and each row:
-		 //if the cell is not a mine continue to check for bombs near by.
-				
 
-					// the value of this box is the sum of the mines in the eight neighboring tiles:
-					 if(getNewSquare(x, y+1)=='18' || getNewSquare(x, y+1)== '19'){ // down
-						 sum++;
-					 }if(getNewSquare(x-1,y+1)=='18' || getNewSquare(x-1,y+1)== '19'){// down & left
-						 sum++;
-					 }if(getNewSquare(x+1,y+1)=='18' || getNewSquare(x+1,y+1)=='19') {// down & right
-						 sum++;
-					 }if(getNewSquare(x,y-1)=='18' || getNewSquare(x,y-1)== '19'){ // up
-						 sum++;
-					 }if(getNewSquare(x-1,y-1)=='18' || getNewSquare(x-1,y-1)== '19'){// up & left
-						 sum++;
-					 }if(getNewSquare(x+1,y-1)=='18' || getNewSquare(x+1,y-1)== '19'){// up & right
-						 sum++;
-					 }if(getNewSquare(x-1,y)=='18' || getNewSquare(x-1,y)== '19'){// left
-						 sum++;
-					 }if(getNewSquare(x+1,y)=='18' || getNewSquare(x+1,y)== '19'){// right.
-						 sum++;
-					 }
-				
+	var sum = 0;
+	var x = b;
+	var y = a;
+	// and each row:
+	//if the cell is not a mine continue to check for bombs near by.
 
-	console.log("sum: " + sum);			
-	return sum;//number of bombs next to current cell;
+
+	// the value of this box is the sum of the mines in the eight neighboring tiles:
+	if (getNewSquare(x, y + 1) == '18' || getNewSquare(x, y + 1) == '19') { // down
+		sum++;
+	}
+	if (getNewSquare(x - 1, y + 1) == '18' || getNewSquare(x - 1, y + 1) == '19') { // down & left
+		sum++;
+	}
+	if (getNewSquare(x + 1, y + 1) == '18' || getNewSquare(x + 1, y + 1) == '19') { // down & right
+		sum++;
+	}
+	if (getNewSquare(x, y - 1) == '18' || getNewSquare(x, y - 1) == '19') { // up
+		sum++;
+	}
+	if (getNewSquare(x - 1, y - 1) == '18' || getNewSquare(x - 1, y - 1) == '19') { // up & left
+		sum++;
+	}
+	if (getNewSquare(x + 1, y - 1) == '18' || getNewSquare(x + 1, y - 1) == '19') { // up & right
+		sum++;
+	}
+	if (getNewSquare(x - 1, y) == '18' || getNewSquare(x - 1, y) == '19') { // left
+		sum++;
+	}
+	if (getNewSquare(x + 1, y) == '18' || getNewSquare(x + 1, y) == '19') { // right.
+		sum++;
+	}
+
+	console.log("sum: " + sum);
+	return sum; //number of bombs next to current cell;
 }
+
 function diff() {
 	return document.getElementById("selection").value;
 }
 
-function getNewSquare (row, col) {
+function getNewSquare(row, col) {
 	var x7;
 	var y7;
-	var level7=diff();
+	var level7 = diff();
 
 	if (level7 == "easy") {
-		x7= 3;
-		y7=3;
+		x7 = 3;
+		y7 = 3;
 	} else if (level7 == "medium") {
-		x7=7;
-		y7=7;
-	} else{
-		x7=10;
-		y7=10;
+		x7 = 7;
+		y7 = 7;
+	} else {
+		x7 = 10;
+		y7 = 10;
 	}
-	if (row<0|| col<0){
-		return;
-	}if (row>x7-1|| col>y7-1){
+	if (row < 0 || col < 0) {
 		return;
 	}
-		
+	if (row > x7 - 1 || col > y7 - 1) {
+		return;
+	}
+
 	return newGrid[row][col];
 }
 
 function myFunction(row, col) {
 	console.log(row, col);
-	//addHTML("squareLocation", row + " " + col + " " + "|");
-
 	// regular square is 15. flag is 16. bomb is 17. square with hidden bomb is 18. flag with bomb under is 19
 
 	if (flagRightClick()) {
@@ -97,18 +103,17 @@ function myFunction(row, col) {
 		}
 	} else {
 		if (newGrid[row][col] == "15") {
-			var nbn = numberBombCheck(row,col);
-			console.log('eff' + [row][col]);
+			var nbn = numberBombCheck(row, col);
 			newGrid[row][col] = nbn;
+			//if (nbn == 0) {
+			//	reDrawGame();
+			//	zeroCheck(row,col);
+			//}
 			reDrawGame();
 		} else if (newGrid[row][col] == "18") {
 			newGrid[row][col] = "17";
 			reDrawGame();
 			window.setTimeout(gameOver, 1000);
-
-		} else if (newGrid[row][col] == "0") {
-			//zeroCheck(row,col);
-			reDrawGame();
 		}
 
 	}
@@ -128,65 +133,99 @@ function gameWin() {
 		"<br>" + "Press new game button to play again!");
 }
 
-function zeroCheck(row, col) {
+function zeroCheck(t, z) {
+	var x = t;
+	var y = z;
 
+	if (getNewSquare(x, y + 1) == '0' ) { // down
+		newGrid[x][y + 1] = "0";
+		reDrawGame();
+	}
+	if (getNewSquare(x - 1, y + 1) == '0' ) { // down & left
+		newGrid[x - 1][y + 1] = "0";
+		reDrawGame();
+	}
+	if (getNewSquare(x + 1, y + 1) == '0' ) { // down & right
+		newGrid[x + 1][y + 1] = "0";
+		reDrawGame();
+	}
+	if (getNewSquare(x, y - 1) == '0' ) { // up
+		newGrid[x][y - 1] = "0";
+		reDrawGame();
+	}
+	if (getNewSquare(x - 1, y - 1) == '0' ) { // up & left
+		newGrid[x - 1][y - 1] = "0";
+		reDrawGame();
+	}
+	if (getNewSquare(x + 1, y - 1) == '0') { // up & right
+		newGrid[x + 1][y - 1] = "0";
+		reDrawGame();
+	}
+	if (getNewSquare(x - 1, y) == '0' ) { // left
+		newGrid[x - 1][y] = "0";
+		reDrawGame();
+	}
+	if (getNewSquare(x + 1, y) == '0') { // right.
+		newGrid[x + 1][y] = "0";
+		reDrawGame();
+	}
 }
 // regular square is 15. flag is 16. bomb is 17. square with hidden bomb is 18. flag with bomb under is 19
 function squareRevealCheck() {
 	var xx;
 	var yy;
-	var level3=diff();
+	var level3 = diff();
 
 	if (level3 == "easy") {
-		xx= 3;
-		yy=3;
+		xx = 3;
+		yy = 3;
 	} else if (level3 == "medium") {
-		xx=7;
-		yy=7;
-	} else{
-		xx=10;
-		yy=10;
+		xx = 7;
+		yy = 7;
+	} else {
+		xx = 10;
+		yy = 10;
 	}
-	
-if (actualMines=="0"){
-for (r = 0; r < xx; r++) {
-		for (c = 0; c < yy; c++) {
-			var SRcontent = getNewSquare(r, c);
-			console.log(SRcontent);
-			if(SRcontent == "16") {
-				r=xx;
-				c=yy;
-				return true;
-				
-			}else if (SRcontent == "15") {
-				r=xx;
-				c=yy;
-				return true;
-				
-				
-			}else if(SRcontent == "18") {
-				r=xx;
-				c=yy;
-				return true;
-				
+
+	if (actualMines == "0") {
+		for (r = 0; r < xx; r++) {
+			for (c = 0; c < yy; c++) {
+				var SRcontent = getNewSquare(r, c);
+				console.log(SRcontent);
+				if (SRcontent == "16") {
+					r = xx;
+					c = yy;
+					return true;
+
+				} else if (SRcontent == "15") {
+					r = xx;
+					c = yy;
+					return true;
+
+
+				} else if (SRcontent == "18") {
+					r = xx;
+					c = yy;
+					return true;
+
+				}
+
 			}
-			
 		}
-}
-}else{
-return true;
-}
+	} else {
+		return true;
+	}
 }
 
 
-function changeState(arr){
-	 currentState = [arr];
+function changeState(arr) {
+	currentState = [arr];
 	return currentState;
 }
 
-function curLvl(i){
+function curLvl(i) {
 	currentLvl = i;
-   return currentLvl;
+	return currentLvl;
 }
 
 function newGame() {
@@ -201,110 +240,126 @@ function newGame() {
 		actualMines = 3;
 		displayMines = 3;
 	} else if (level2 == "medium") {
-		rows=7;
-		cols=7;
+		rows = 7;
+		cols = 7;
 		actualMines = 7;
 		displayMines = 7;
-	} else{
-		rows=10;
-		cols=10;
+	} else {
+		rows = 10;
+		cols = 10;
 		actualMines = 10;
 		displayMines = 10;
 	}
-	
+
 	setHTML("squareLocation", "");
 	reDrawGame(newGrid);
 }
-function har(){
-	var myArray = [[
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 18, 15, 15, 15, 15, 15, 18, 15],
-		[15, 15, 18, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 18, 15, 15, 15, 15, 15, 15],
-		[18, 15, 15, 15, 15, 15, 15, 15, 18, 15],
-		[18, 15, 15, 18, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 18, 15, 15, 15, 15, 18, 15, 15],
-	], [
-		[15, 15, 15, 15, 15, 15, 18, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 18, 15, 15, 15, 15, 15, 18, 15],
-		[15, 15, 15, 15, 15, 18, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 18, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 18, 15, 15, 18],
-		[18, 15, 15, 18, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 18, 15, 15, 15, 15],
-	], [
-		[15, 15, 18, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 18, 15, 15, 15, 15, 15, 18, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[18, 15, 15, 18, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 18, 15, 15, 15, 15, 15, 15],
-		[18, 15, 15, 15, 15, 15, 15, 15, 18, 15],
-		[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 18, 15, 15, 15, 15, 18, 15, 15],
-	]]; 
+
+function har() {
+	var myArray = [
+		[
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 18, 15, 15, 15, 15, 15, 18, 15],
+			[15, 15, 18, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 18, 15, 15, 15, 15, 15, 15],
+			[18, 15, 15, 15, 15, 15, 15, 15, 18, 15],
+			[18, 15, 15, 18, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 18, 15, 15, 15, 15, 18, 15, 15],
+		],
+		[
+			[15, 15, 15, 15, 15, 15, 18, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 18, 15, 15, 15, 15, 15, 18, 15],
+			[15, 15, 15, 15, 15, 18, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 18, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 18, 15, 15, 18],
+			[18, 15, 15, 18, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 18, 15, 15, 15, 15],
+		],
+		[
+			[15, 15, 18, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 18, 15, 15, 15, 15, 15, 18, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[18, 15, 15, 18, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 18, 15, 15, 15, 15, 15, 15],
+			[18, 15, 15, 15, 15, 15, 15, 15, 18, 15],
+			[15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 18, 15, 15, 15, 15, 18, 15, 15],
+		]
+	];
 	var random = myArray[Math.floor(Math.random() * myArray.length)];
-//function call to create zeros and other numbers
-return random;
+	//function call to create zeros and other numbers
+	return random;
 
 }
-function med(){
-	var myArray2 = [[
-		[18, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 18, 15],
-		[15, 15, 15, 15, 15, 15, 15],
-		[15, 18, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 18, 15, 15],
-		[18, 15, 15, 15, 15, 15, 18],
-		[15, 15, 18, 15, 15, 15, 15],
-	], [
-		[15, 15, 15, 15, 18, 15, 15],
-		[15, 15, 15, 15, 15, 15, 18],
-		[15, 15, 15, 15, 15, 15, 15],
-		[15, 18, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15],
-		[18, 15, 15, 15, 15, 15, 18],
-		[15, 15, 18, 15, 15, 18, 15],
-	], [
-		[15, 18, 15, 15, 15, 18, 15],
-		[15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 18, 15, 15],
-		[15, 18, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 15],
-		[15, 15, 15, 15, 15, 15, 18],
-		[15, 15, 15, 18, 18, 15, 15],
-	]]; 
+
+function med() {
+	var myArray2 = [
+		[
+			[18, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 18, 15],
+			[15, 15, 15, 15, 15, 15, 15],
+			[15, 18, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 18, 15, 15],
+			[18, 15, 15, 15, 15, 15, 18],
+			[15, 15, 18, 15, 15, 15, 15],
+		],
+		[
+			[15, 15, 15, 15, 18, 15, 15],
+			[15, 15, 15, 15, 15, 15, 18],
+			[15, 15, 15, 15, 15, 15, 15],
+			[15, 18, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15],
+			[18, 15, 15, 15, 15, 15, 18],
+			[15, 15, 18, 15, 15, 18, 15],
+		],
+		[
+			[15, 18, 15, 15, 15, 18, 15],
+			[15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 18, 15, 15],
+			[15, 18, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 15],
+			[15, 15, 15, 15, 15, 15, 18],
+			[15, 15, 15, 18, 18, 15, 15],
+		]
+	];
 	var random2 = myArray2[Math.floor(Math.random() * myArray2.length)];
 
-return random2;
+	return random2;
 
 }
-function eas(){
-	var myArray3 = [[
-		[15, 15, 18],
-		[18, 15, 15],
-		[15, 18, 15],
-	], [
-		[18, 18, 15],
-		[15, 15, 15],
-		[15, 15, 18],
-	], [
-		[15, 15, 18],
-		[15, 18, 15],
-		[18, 15, 15],
-	]]; 
+
+function eas() {
+	var myArray3 = [
+		[
+			[15, 15, 18],
+			[18, 15, 15],
+			[15, 18, 15],
+		],
+		[
+			[18, 18, 15],
+			[15, 15, 15],
+			[15, 15, 18],
+		],
+		[
+			[15, 15, 18],
+			[15, 18, 15],
+			[18, 15, 15],
+		]
+	];
 	var random3 = myArray3[Math.floor(Math.random() * myArray3.length)];
 
-return random3;
+	return random3;
 
 }
+
 function grid() {
 	var difficulty = diff();
 
