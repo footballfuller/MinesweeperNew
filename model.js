@@ -1,5 +1,13 @@
 // regular square is 15. flag is 16. bomb is 17. square with hidden bomb is 18. flag with bomb under is 19
 
+///////////////////
+//   Globals     //
+///////////////////
+
+var currentState = []; // Current Grid
+var currentLvl;		   // Current Difficulty 
+
+////////////////////
 
 function diff() {
 	return document.getElementById("selection").value;
@@ -92,17 +100,17 @@ function squareRevealCheck() {
 		xx=10;
 		yy=10;
 	}
-	var SRcontent = getNewSquare(xx, yy);
+var SRcontent = getNewSquare(xx, yy);
 for (r = 0; r < xx; r++) {
 		for (c = 0; c < yy; c++) {
 			if (SRcontent == "15") {
-				return false;
 				r=xx;
 				c=yy;
+				return false;
 			}else if(SRcontent == "18") {
-				return false;
 				r=xx;
 				c=yy;
+				return false;
 			}
 			
 		}
@@ -110,13 +118,25 @@ for (r = 0; r < xx; r++) {
 return true;
 }
 
+
+function changeState(arr){
+	 currentState = [arr];
+	return currentState;
+}
+
+function curLvl(i){
+	currentLvl = i;
+   return currentLvl;
+}
+
 function newGame() {
 	newGrid = grid();
-	console.log(newGrid);
-	var level2=diff();
+	changeState(grid());
+	var level2 = diff();
+	curLvl(level2);
 	if (level2 == "easy") {
-		rows= 3;
-		cols=3;
+		rows = 3;
+		cols = 3;
 		actualMines = 3;
 		displayMines = 3;
 	} else if (level2 == "medium") {
@@ -170,7 +190,7 @@ function har(){
 		[15, 15, 18, 15, 15, 15, 15, 18, 15, 15],
 	]]; 
 	var random = myArray[Math.floor(Math.random() * myArray.length)];
-
+//function call to create zeros and other numbers
 return random;
 
 }
