@@ -5,6 +5,10 @@ function diff() {
 	return document.getElementById("selection").value;
 }
 
+function getNewSquare (row, col) {
+	return newGrid[row][col];
+}
+
 function myFunction(row, col) {
 	console.log(row, col);
 	addHTML("squareLocation", row + " " + col + " " + "|");
