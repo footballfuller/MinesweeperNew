@@ -2,24 +2,18 @@ var actualMines = 10;
 var displayMines = 10;
 
 function reDrawGame(rows, cols) {
-	var rows = 9;
-	var cols = 9;
+	var rows;
+	var cols;
 	var level=diff();
-	if (difficulty == easy) {
-		rows= 9;
-		cols=9;
-		actualMines = 10;
-		displayMines = 10;
-	} else if (difficulty == medium) {
-		rows=15;
-		cols=15;
-		actualMines = 15;
-		displayMines = 15;
+	if (level == "easy") {
+		rows= 3;
+		cols=3;
+	} else if (level == "medium") {
+		rows=7;
+		cols=7;
 	} else{
-		rows=15;
-		cols=20;
-		actualMines = 20;
-		displayMines = 20;
+		rows=10;
+		cols=10;
 	}
 			
 
@@ -38,8 +32,8 @@ function reDrawGame(rows, cols) {
 		for (c = 0; c < cols; c++) {
 
 			var content = getNewSquare(r, c);
-			console.log("row: " + r + " col: " + " " + c +
-				" content: " + content);
+			//console.log("row: " + r + " col: " + " " + c +
+			//	" content: " + content);
 
 			if (content == 15) {
 
