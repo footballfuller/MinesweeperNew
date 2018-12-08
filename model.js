@@ -5,7 +5,7 @@ function diff() {
 	return document.getElementById("selection").value;
 }
 
-function getNewSquare(row, col) {
+function getNewSquare (row, col) {
 	return newGrid[row][col];
 }
 
@@ -132,7 +132,7 @@ function newGame() {
 	}
 	
 	setHTML("squareLocation", "");
-	reDrawGame();
+	reDrawGame(newGrid);
 }
 function har(){
 	var myArray = [[
