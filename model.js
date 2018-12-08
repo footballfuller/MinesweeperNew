@@ -59,15 +59,7 @@ function myFunction(row, col) {
 
 
 }
-var newGrid =  [[15, 15, 18, 15, 15, 15, 15, 15, 15] , 
-			   [15, 15, 15, 15, 15, 15, 15, 15, 15] ,
-			   [15, 15, 18, 15, 15, 15 , 15, 15, 18] ,
-			   [15, 15, 15, 15, 15, 15 , 15, 15, 15] ,
-			   [18, 15, 15, 18, 15, 15 , 15, 15, 15] ,
-			   [15, 15, 15, 15, 15, 15 , 15, 15, 15] ,
-			   [15, 15, 15, 18, 15, 15 , 15, 15, 15] ,
-			   [18, 15, 15, 15, 15, 15 , 15, 15, 18] ,
-			   [15, 15, 18, 15, 15, 15 , 15, 18, 15] ];
+var newGrid;
 function gameOver() {
 	setHTML("outputEl", "You Clicked a Mine,Game Over!" + "<br>" + "<img src='bomb.jpg' alt='Bomb' height='200' width='200' >" +
 		"<br>" + "Press new game button to try again!");
@@ -120,6 +112,7 @@ return true;
 
 function newGame() {
 	newGrid = grid();
+	console.log(newGrid);
 	var level2=diff();
 	if (level2 == "easy") {
 		rows= 3;
@@ -235,14 +228,14 @@ function grid() {
 	var difficulty = diff();
 
 	var easy = eas();
-	console.log(easy);
+	//console.log(easy);
 	var medium = med();
-	console.log(med);
+	//console.log(medium);
 	var hard = har();
-	console.log(har);
-	if (difficulty == easy) {
+	//console.log(hard);
+	if (difficulty == "easy") {
 		return easy;
-	} else if (difficulty == medium) {
+	} else if (difficulty == "medium") {
 		return medium;
 	} else return hard;
 }
