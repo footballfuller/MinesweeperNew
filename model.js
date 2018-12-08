@@ -33,11 +33,6 @@ function myFunction(row, col) {
 			displayMines--;
 			actualMines--;
 			reDrawGame();
-			if (actualMines=="0"){
-				if(squareRevealCheck()){
-					gameWin();
-			}
-			}
 		} else if (newGrid[row][col] == "16") {
 			newGrid[row][col] = "15";
 			displayMines++;
@@ -87,9 +82,10 @@ function zeroCheck(row, col) {
 }
 // regular square is 15. flag is 16. bomb is 17. square with hidden bomb is 18. flag with bomb under is 19
 function squareRevealCheck() {
-	var xx=9;
-	var yy=9;
+	var xx;
+	var yy;
 	var level3=diff();
+
 	if (level3 == "easy") {
 		xx= 3;
 		yy=3;
@@ -100,22 +96,35 @@ function squareRevealCheck() {
 		xx=10;
 		yy=10;
 	}
-var SRcontent = getNewSquare(xx, yy);
+	
+if (actualMines=="0"){
 for (r = 0; r < xx; r++) {
 		for (c = 0; c < yy; c++) {
-			if (SRcontent == "15") {
+			var SRcontent = getNewSquare(r, c);
+			console.log(SRcontent);
+			if(SRcontent == "16") {
 				r=xx;
 				c=yy;
-				return false;
+				return true;
+				
+			}else if (SRcontent == "15") {
+				r=xx;
+				c=yy;
+				return true;
+				
+				
 			}else if(SRcontent == "18") {
 				r=xx;
 				c=yy;
-				return false;
+				return true;
+				
 			}
 			
 		}
 }
+}else{
 return true;
+}
 }
 
 
@@ -248,11 +257,8 @@ function grid() {
 	var difficulty = diff();
 
 	var easy = eas();
-	//console.log(easy);
 	var medium = med();
-	//console.log(medium);
 	var hard = har();
-	//console.log(hard);
 	if (difficulty == "easy") {
 		return easy;
 	} else if (difficulty == "medium") {

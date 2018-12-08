@@ -122,4 +122,7 @@ function reDrawGame(rows, cols) {
 		addHTML("outputEl", "<br>");
 	}
 	addHTML("outputEl", "<br>");
+	if(!squareRevealCheck()){
+		gameWin();
+	}
 }
