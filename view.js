@@ -18,7 +18,7 @@ function reDrawGame(rows, cols) {
 
 	setHTML("outputEl", "");
 
-	addHTML("outputEl", "<img id='Bomb Counter' src='bomb.jpg'>" + "  d" + displayMines + "   a" + actualMines);
+	addHTML("outputEl", "<img id='Bomb Counter' src='bomb.jpg'>" + "  Mines Left:" + displayMines);
 	addHTML("outputEl", "<br>");
 	addHTML("outputEl", "<br>");
 	addHTML("outputEl", "<br>");
