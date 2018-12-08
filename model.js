@@ -6,6 +6,7 @@
 
 var currentState = []; // Current Grid
 var currentLvl;		   // Current Difficulty 
+var newGrid;
 
 ////////////////////
 
@@ -45,8 +46,8 @@ function myFunction(row, col) {
 		}
 	} else {
 		if (newGrid[row][col] == "15") {
-			//numberBombCheck(row,col);
-			newGrid[row][col] = "4";
+			var nbn=numberBombCheck(row,col);
+			newGrid[row][col] = nbn;
 			reDrawGame();
 		} else if (newGrid[row][col] == "18") {
 			newGrid[row][col] = "17";
@@ -62,7 +63,32 @@ function myFunction(row, col) {
 
 
 }
-var newGrid;
+
+function numberBombCheck(rows, cols) {
+	
+	var sum; 
+		var x = rows;
+		var y = cols;
+		
+	       // and each row:
+		 //if the cell is not a mine continue to check for bombs near by.
+				
+					sum=0;
+					sum = // the value of this box is the sum of the mines in the eight neighboring tiles:
+					 ((newGrid[x][y+1]=='18') sum++;|1)        // down
+					+((newGrid[x-1][y+1]=='18') sum++;|1)        // down & left
+					+((newGrid[x+1][y+1]=='18')sum++;|1)        // down & right
+					+((newGrid[x][y-1]=='18')sum++;|1)        // up
+					+((newGrid[x-1][y-1]=='18')sum++;|1)        // up & left
+					+((newGrid[x+1][y-1]=='18')sum++;|1)        // up & right
+					+((newGrid[x-1][y]=='18')sum++;|1)        // left
+					+((newGrid[x+1][y]=='18')sum++;|1);        // right.
+				
+
+	console.log(sum);			
+	return sum;//number of bombs next to current cell;
+}
+
 function gameOver() {
 	setHTML("outputEl", "You Clicked a Mine,Game Over!" + "<br>" + "<img src='bomb.jpg' alt='Bomb' height='200' width='200' >" +
 		"<br>" + "Press new game button to try again!");

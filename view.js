@@ -1,37 +1,6 @@
 var actualMines = 10;
 var displayMines = 10;
 
-function bomb_finder (){}
-
-function zeroMaker(rows, cols) {
-	
-	for (r = 0; r < rows; r++) {
-		for (c = 0; c < cols; c++) {
-
-		}
-	}
-	// fix me         
-	for(var x=0;x<columns;x++) {       // For each column
-	for(y=0;y<rows+1;y++)        // and each row:
-			{
-			if(check(x,y)!='mine') //if the cell is not a mine:
-					{
-					board[x+y*columns]= // the value of the cell is the sum of mines in the eight neighboring tiles:
-					 ((check(x,y+1)=='mine')|0)        // down
-					+((check(x-1,y+1)=='mine')|0)        // down & left
-					+((check(x+1,y+1)=='mine')|0)        // down & right
-					+((check(x,y-1)=='mine')|0)        // up
-					+((check(x-1,y-1)=='mine')|0)        // up & left
-					+((check(x+1,y-1)=='mine')|0)        // up & right
-					+((check(x-1,y)=='mine')|0)        // left
-					+((check(x+1,y)=='mine')|0);        // right.
-					}
-			}
-	}
-}
-
-
-
 function reDrawGame(rows, cols) {
 	var rows;
 	var cols;
