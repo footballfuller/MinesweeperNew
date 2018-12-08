@@ -9,7 +9,38 @@ var currentLvl;		   // Current Difficulty
 var newGrid;
 
 ////////////////////
+function numberBombCheck(b, a) {
+	
+	var sum=0; 
+		var x = b;
+		var y = a;
+	       // and each row:
+		 //if the cell is not a mine continue to check for bombs near by.
+				
 
+					// the value of this box is the sum of the mines in the eight neighboring tiles:
+					 if(getNewSquare(x, y+1)=='18'){ // down
+						 sum++;
+					 }else if(getNewSquare(x-1,y+1)=='18'){// down & left
+						 sum++;
+					 }else if(getNewSquare(x+1,y+1)=='18') {// down & right
+						 sum++;
+					 }else if(getNewSquare(x,y-1)=='18'){ // up
+						 sum++;
+					 }else if(getNewSquare(x-1,y-1)=='18'){// up & left
+						 sum++;
+					 }else if(getNewSquare(x+1,y-1)=='18'){// up & right
+						 sum++;
+					 }else if(getNewSquare(x-1,y)=='18'){// left
+						 sum++;
+					 }else if(getNewSquare(x+1,y)=='18'){// right.
+						 sum++;
+					 }
+				
+
+	console.log(sum);			
+	return sum;//number of bombs next to current cell;
+}
 function diff() {
 	return document.getElementById("selection").value;
 }
@@ -46,7 +77,8 @@ function myFunction(row, col) {
 		}
 	} else {
 		if (newGrid[row][col] == "15") {
-			var nbn=numberBombCheck(row,col);
+			var nbn = numberBombCheck(row,col);
+			console.log('eff' + [row][col]);
 			newGrid[row][col] = nbn;
 			reDrawGame();
 		} else if (newGrid[row][col] == "18") {
@@ -64,30 +96,7 @@ function myFunction(row, col) {
 
 }
 
-function numberBombCheck(rows, cols) {
-	
-	var sum; 
-		var x = rows;
-		var y = cols;
-		
-	       // and each row:
-		 //if the cell is not a mine continue to check for bombs near by.
-				
-					sum=0;
-					sum = // the value of this box is the sum of the mines in the eight neighboring tiles:
-					 ((newGrid[x][y+1]=='18') sum++;|1)        // down
-					+((newGrid[x-1][y+1]=='18') sum++;|1)        // down & left
-					+((newGrid[x+1][y+1]=='18')sum++;|1)        // down & right
-					+((newGrid[x][y-1]=='18')sum++;|1)        // up
-					+((newGrid[x-1][y-1]=='18')sum++;|1)        // up & left
-					+((newGrid[x+1][y-1]=='18')sum++;|1)        // up & right
-					+((newGrid[x-1][y]=='18')sum++;|1)        // left
-					+((newGrid[x+1][y]=='18')sum++;|1);        // right.
-				
 
-	console.log(sum);			
-	return sum;//number of bombs next to current cell;
-}
 
 function gameOver() {
 	setHTML("outputEl", "You Clicked a Mine,Game Over!" + "<br>" + "<img src='bomb.jpg' alt='Bomb' height='200' width='200' >" +
@@ -97,10 +106,6 @@ function gameOver() {
 function gameWin() {
 	setHTML("outputEl", "You won the game,Congrats!!" + "<br>" + "<img src='smiley.jpg' alt='Smiley' height='200' width='200' >" +
 		"<br>" + "Press new game button to play again!");
-}
-
-function numberBombCheck(row, col) {
-
 }
 
 function zeroCheck(row, col) {
@@ -167,6 +172,7 @@ function curLvl(i){
 function newGame() {
 	newGrid = grid();
 	changeState(grid());
+	console.log(newGrid);
 	var level2 = diff();
 	curLvl(level2);
 	if (level2 == "easy") {
