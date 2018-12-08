@@ -1,26 +1,19 @@
 var actualMines = 10;
 var displayMines = 10;
 
-function reDrawGame(gr) {
-	var cState = gr;
-	var rows = 9;
-	var cols = 9;
+function reDrawGame(rows, cols) {
+	var rows;
+	var cols;
 	var level=diff();
 	if (level == "easy") {
-		rows= 9;
-		cols=9;
-		actualMines = 10;
-		displayMines = 10;
+		rows= 3;
+		cols=3;
 	} else if (level == "medium") {
-		rows=15;
-		cols=15;
-		actualMines = 15;
-		displayMines = 15;
+		rows=7;
+		cols=7;
 	} else{
-		rows=15;
-		cols=20;
-		actualMines = 20;
-		displayMines = 20;
+		rows=10;
+		cols=10;
 	}
 
 	setHTML("outputEl", "");
@@ -31,14 +24,12 @@ function reDrawGame(gr) {
 	addHTML("outputEl", "<br>");
 	addHTML("outputEl", "<br>");
 
-	for (var r = 0; r < rows; r++) {
-		for (var c = 0; c < cols; c++) {
+	for (r = 0; r < rows; r++) {
+		for (c = 0; c < cols; c++) {
 
-			var x;
-			var y;
-			var content = cState[r][c];
-		//	console.log("row: " + r + " col: " + " " + c +
-		//		" content: " + content);
+			var content = getNewSquare(r, c);
+			//console.log("row: " + r + " col: " + " " + c +
+			//	" content: " + content);
 
 			if (content == 15) {
 
