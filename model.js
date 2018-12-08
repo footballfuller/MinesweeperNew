@@ -71,7 +71,7 @@ function getNewSquare (row, col) {
 
 function myFunction(row, col) {
 	console.log(row, col);
-	addHTML("squareLocation", row + " " + col + " " + "|");
+	//addHTML("squareLocation", row + " " + col + " " + "|");
 
 	// regular square is 15. flag is 16. bomb is 17. square with hidden bomb is 18. flag with bomb under is 19
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Minesweeper Description</title>
+<link href="StyleSheet.css" rel="stylesheet" type="text/css">
+</head>
+<body >
+<h1>Minesweeper</h1>
+
+<p style="left: 65%; top:5%; position: absolute;">Username:<br><input id="username" type="text" placeholder="Username" class="search" />
+</p>
+<p style="left: 80%; top:5%; position: absolute;">Password:<br><input id="password" type="password" placeholder="Password" class="search" onkeydown="loadSyncPost"/>
+</p>
+<button id="logIn" style="left: 65%; top: 15%; position: absolute;" onclick="loadSyncPost()">Log in</button>
+<span id="passwordFail" style="left: 65%; top: 20%; position:absolute; color: red; "></span>
+<br>
+<hr>
+<figure>
+<img src="Capture.JPG" alt="Minesweeper Example" width="325" height="276" >
+<figcaption>Image captured as screenshot from Microsoft Minesweeper game.</figcaption>
+</figure>
+<p>Minesweeper is a game with a grid of squares that you try to figure where bombs are hiding underneath. You start the game by clicking on a square then it reveals number
+"hints" the tell you how many bombs are touching that particular square. From there you figure out or guess which squares have bombs hiding and put red flags on them.
+ You win when you find all the bombs without clicking one!  </p>
+<p> Here is a link to the Minesweeper wikipedia page:<a href="https://en.wikipedia.org/wiki/Minesweeper_(video_game)" target="_blank">Minesweeper Wiki</a></p>
+<hr>
+<a href="GamePage.html" target="_self">Play Minesweeper</a>
+<br>
+<a href="documentation.html" target="_self">Documentation</a>
+
+<script src="model.js"></script>
+<script src="view.js"></script>
+</body>
+</html>
